@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Button } from 'react-native'
 import { connect } from 'react-redux'
 
-import { NavigationActions } from '../utils'
+import { NavigationActions, quotationSrc } from '../utils'
 
 @connect()
 class Home extends Component {
   static navigationOptions = {
     title: 'Home',
+    header: null,
     tabBarLabel: 'Home',
     tabBarIcon: ({ focused, tintColor }) =>
       <Image
@@ -15,6 +16,8 @@ class Home extends Component {
         source={require('../images/house.png')}
       />,
   }
+
+  componentWillMount() {}
 
   gotoDetail = () => {
     this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
@@ -32,8 +35,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   icon: {
     width: 32,

@@ -6,6 +6,7 @@ export default {
   state: {
     fetching: false,
     login: false,
+    quotationList: [],
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -13,6 +14,9 @@ export default {
     },
     loginEnd(state, { payload }) {
       return { ...state, ...payload, fetching: false }
+    },
+    changeQuotation(state, { payload }) {
+      return { ...state, quotationList: payload.quotationList }
     },
   },
   effects: {

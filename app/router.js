@@ -11,13 +11,13 @@ import { connect } from 'react-redux'
 
 import Login from './containers/Login'
 import Home from './containers/Home'
-import Account from './containers/Account'
+import Quotation from './containers/Quotation'
 import Detail from './containers/Detail'
 
 const HomeNavigator = TabNavigator(
   {
     Home: { screen: Home },
-    Account: { screen: Account },
+    Quotation: { screen: Quotation },
   },
   {
     tabBarComponent: TabBarBottom,
