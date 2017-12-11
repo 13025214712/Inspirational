@@ -34,7 +34,6 @@ class Bing extends Component {
   fetchBing = () => {
     fetch(bingSrc).then(data => data.json()).then(data => {
       const bingList = data.showapi_res_body.list
-      console.log(data)
       this.props.dispatch({ type: 'app/changeBing', payload: { bingList } })
     })
   }
@@ -46,13 +45,13 @@ class Bing extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {' '}{this.props.app.bingList.map((item, index) =>
+        {this.props.app.bingList.map((item, index) =>
           <View key={index}>
-            {' '}<Image style={styles.image} source={{ uri: item.pic }} />{' '}
-            <Text style={styles.title}> {item.title.split('(©')[0]} </Text>{' '}
-            <Text style={styles.content}> {item.content} </Text>{' '}
+            <Image style={styles.image} source={{ uri: item.pic }} />
+            <Text style={styles.title}> {item.title.split('(©')[0]} </Text>
+            <Text style={styles.content}> {item.content} </Text>
           </View>
-        )}{' '}
+        )}
       </ScrollView>
     )
   }

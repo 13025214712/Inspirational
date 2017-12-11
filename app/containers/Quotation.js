@@ -28,7 +28,6 @@ class Quotation extends Component {
         type: 'app/changeQuotation',
         payload: { quotationList },
       })
-      console.log(quotationList)
     })
   }
 
@@ -39,13 +38,12 @@ class Quotation extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {' '}{/* <Button title="Goto Detail" onPress={this.gotoDetail} /> */}{' '}
         {this.props.app.quotationList.map((item, index) =>
           <View key={index}>
-            {' '}<Text style={styles.english}> {item.english} </Text>{' '}
-            <Text style={styles.chinese}> {item.chinese} </Text>{' '}
+            <Text style={styles.english}> {item.english} </Text>
+            <Text style={styles.chinese}> {item.chinese} </Text>
           </View>
-        )}{' '}
+        )}
       </ScrollView>
     )
   }

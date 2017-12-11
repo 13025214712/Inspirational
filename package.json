@@ -5,10 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "prettier": "prettier --write --single-quote --no-semi --trailing-comma es5 --print-width 80 \"app/**/*.js\"",
+    "NOprettier": "prettier --write --single-quote --no-semi --trailing-comma es5 --print-width 80 \"app/**/*.js\"",
     "lint": "eslint app",
     "format": "yarn prettier && yarn lint -- --fix",
-    "precommit": "yarn format"
+    "NOprecommit": "yarn format"
   },
   "dependencies": {
     "dva-core": "^0.1.3",
