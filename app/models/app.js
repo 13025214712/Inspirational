@@ -7,6 +7,7 @@ export default {
     fetching: false,
     login: false,
     quotationList: [],
+    bingList: [],
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -17,6 +18,9 @@ export default {
     },
     changeQuotation(state, { payload }) {
       return { ...state, quotationList: payload.quotationList }
+    },
+    changeBing(state, { payload }) {
+      return { ...state, bingList: payload.bingList }
     },
   },
   effects: {

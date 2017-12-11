@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  View,
-  Image,
-  Button,
-  Text,
-  ScrollView,
-  Dimensions,
-} from 'react-native'
+import { StyleSheet, View, Image, Text, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
 import { NavigationActions, quotationSrc } from '../utils'
-
-const picWidth = Dimensions.get('screen').width
-const picHeight = picWidth * 1080 / 1920
 
 @connect(({ app }) => ({ app }))
 class Quotation extends Component {
@@ -24,7 +13,7 @@ class Quotation extends Component {
     tabBarIcon: ({ focused, tintColor }) =>
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
-        source={require('../images/person.png')}
+        source={require('../images/house.png')}
       />,
   }
 
@@ -34,59 +23,39 @@ class Quotation extends Component {
 
   fetchQuotation = () => {
     fetch(quotationSrc).then(data => data.json()).then(data => {
-      const quotationList = data.showapi_res_body.list
-      console.log(data)
+      const quotationList = data.showapi_res_body.data
       this.props.dispatch({
         type: 'app/changeQuotation',
         payload: { quotationList },
       })
+      console.log(quotationList)
     })
   }
 
-  gotoLogin = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
+  gotoDetail = () => {
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
+        {' '}{/* <Button title="Goto Detail" onPress={this.gotoDetail} /> */}{' '}
         {this.props.app.quotationList.map((item, index) =>
-          <View>
-            <Image style={styles.image} source={{ uri: item.pic }} />
-            <Text style={styles.title}>
-              {item.title.split('(©')[0]}
-            </Text>
-            <Text style={styles.content}>
-              {item.content}
-            </Text>
+          <View key={index}>
+            {' '}<Text style={styles.english}> {item.english} </Text>{' '}
+            <Text style={styles.chinese}> {item.chinese} </Text>{' '}
           </View>
-        )}
+        )}{' '}
       </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  icon: {
-    width: 32,
-    height: 32,
-  },
-  image: {
-    width: picWidth,
-    height: picHeight,
-  },
-  title: {
-    fontSize: 25,
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  content: {
-    fontSize: 20,
-    marginBottom: 30,
-  },
+  container: { flex: 1, padding: 10 },
+  icon: { width: 32, height: 32 },
+  english: { fontSize: 20, marginBottom: 10 },
+  chinese: { fontSize: 20, marginBottom: 20 },
 })
 
 export default Quotation

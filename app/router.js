@@ -10,14 +10,14 @@ import {
 import { connect } from 'react-redux'
 
 import Login from './containers/Login'
-import Home from './containers/Home'
 import Quotation from './containers/Quotation'
+import Bing from './containers/Bing'
 import Detail from './containers/Detail'
 
 const HomeNavigator = TabNavigator(
   {
-    Home: { screen: Home },
     Quotation: { screen: Quotation },
+    Bing: { screen: Bing },
   },
   {
     tabBarComponent: TabBarBottom,
@@ -102,7 +102,7 @@ class Router extends PureComponent {
     if (currentScreen === 'Login') {
       return true
     }
-    if (currentScreen !== 'Home') {
+    if (currentScreen !== 'Quotation') {
       this.props.dispatch(NavigationActions.back())
       return true
     }
