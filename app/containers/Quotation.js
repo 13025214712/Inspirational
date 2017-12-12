@@ -14,7 +14,7 @@ class Quotation extends Component {
     tabBarIcon: ({ focused, tintColor }) =>
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
-        source={require('../images/house.png')}
+        source={require('../images/quotation.png')}
       />,
   }
 
