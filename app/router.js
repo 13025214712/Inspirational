@@ -35,7 +35,7 @@ const AppNavigator = StackNavigator(
     ArticleContent: { screen: ArticleContent },
   },
   {
-    headerMode: 'none',
+    // headerMode: 'none',
     mode: 'modal',
     navigationOptions: {
       gesturesEnabled: false,

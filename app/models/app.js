@@ -11,6 +11,7 @@ export default {
     articleList:[],
     articleIndex:1,
     articleTotal:0,
+    articleContent:{},
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -27,6 +28,9 @@ export default {
     },
     changeArticleList(state,{payload}){
       return {...state, articleList:payload.articleList }
+    },
+    changeArticleContent(state,{payload}){
+      return {...state, articleContent:payload.articleContent }
     }
   },
   effects: {

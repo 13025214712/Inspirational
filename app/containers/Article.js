@@ -18,7 +18,7 @@ class Article extends Component {
       />,
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.fetchArticle()
   }
 
@@ -46,7 +46,6 @@ class Article extends Component {
       articleItem.content=list[i].getElementsByClassName('yi-list-jj')[0].textContent.trim();
 
       articleList.push(articleItem);
-      console.log(articleItem)
     }
 
     this.props.dispatch({type:'app/changeArticleList', payload:{articleList } })
