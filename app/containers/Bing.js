@@ -11,15 +11,12 @@ import { connect } from 'react-redux'
 
 import { NavigationActions, bingSrc } from '../utils'
 
-const picWidth = Dimensions.get('screen').width
-const picHeight = picWidth * 1080 / 1920
-
 @connect(({ app }) => ({ app }))
 class Bing extends Component {
   static navigationOptions = {
     title: 'Bing',
     header: null,
-    tabBarLabel: 'Bing',
+    tabBarLabel: '美图',
     tabBarIcon: ({ focused, tintColor }) =>
       <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
@@ -28,7 +25,9 @@ class Bing extends Component {
   }
 
   componentWillMount() {
-    this.fetchBing()
+    if(!this.props.app.bingList.length){
+      this.fetchBing();
+    }
   }
 
   fetchBing = () => {
@@ -36,10 +35,6 @@ class Bing extends Component {
       const bingList = data.showapi_res_body.list
       this.props.dispatch({ type: 'app/changeBing', payload: { bingList } })
     })
-  }
-
-  gotoLogin = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
   render() {
@@ -60,9 +55,9 @@ class Bing extends Component {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   icon: { width: 32, height: 32 },
-  image: { width: picWidth, height: picHeight },
-  title: { fontSize: 25, marginBottom: 10, textAlign: 'center' },
-  content: { fontSize: 20, marginBottom: 30 },
+  image: { width: Dimensions.get('screen').width, height: Dimensions.get('screen').width * 1080 / 1920 },
+  title: { fontSize: 25, padding: 10, textAlign: 'center' },
+  content: { fontSize: 20, paddingLeft:10,paddingRight:10,marginBottom: 50 },
 })
 
 export default Bing

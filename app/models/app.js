@@ -53,6 +53,9 @@ export default {
     changeMovieContent(state,{payload}){
       return {...state, movieContent:payload.movieContent }
     },
+    addMovieVideoSrc(state,{payload}){
+      return {...state, movieContent:{...state.movieContent, movieVideoSrc:payload.movieVideoSrc }}
+    }
   },
   effects: {
     *login({ payload }, { call, put }) {

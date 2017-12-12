@@ -19,8 +19,8 @@ import MovieContent from './containers/MovieContent'
 
 const HomeNavigator = TabNavigator(
   {
-    Quotation: { screen: Quotation },
     Bing: { screen: Bing },
+    Quotation: { screen: Quotation },
     Article: { screen: Article },
     Movie: { screen: Movie },
   },

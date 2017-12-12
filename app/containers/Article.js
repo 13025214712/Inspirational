@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Button, Image, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
-import { Pagination, Icon } from 'antd-mobile';
+import { Pagination, Icon, Card, WhiteSpace } from 'antd-mobile';
 
 import { NavigationActions, articleSrc } from '../utils'
 
@@ -11,7 +11,7 @@ class Article extends Component {
   static navigationOptions = {
       title: 'Article',
       header: null,
-      tabBarLabel: 'Bing',
+      tabBarLabel: '文章',
       tabBarIcon: ({ focused, tintColor }) =>
        <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
@@ -49,7 +49,7 @@ class Article extends Component {
       articleItem.title=a.textContent;
       articleItem.href=a.getAttribute('href');
       articleItem.content=list[i].getElementsByClassName('yi-list-jj')[0].textContent.trim();
-//gotopage-s
+
       articleList.push(articleItem);
     }
 
@@ -68,25 +68,25 @@ class Article extends Component {
     this.props.dispatch(NavigationActions.back({ routeName: 'Account' }))
   }
 
-  press=(href)=>{
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'ArticleContent', params:{href} }))
+  press=(href,title)=>{
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'ArticleContent', params:{href,title} }))
   }
 
   changePage=(page)=>{
-    console.log(page);
+    this.scrollView.scrollTo({y:0})
     this.fetchArticle(page)
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} ref={el=>{this.scrollView=el}} >
         {
           this.props.app.articleList.map((item,index)=>{
             return(
-                <TouchableOpacity key={index} onPress={this.press.bind(this,item.href)}>
+                <TouchableOpacity key={index} onPress={this.press.bind(this,item.href, item.title)}>
                   <Image source={{uri:item.imgSrc}} style={styles.image}></Image>
-                  <Text>{item.title}</Text>
-                  <Text>{item.content}</Text>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.content}>{item.content.slice(5)}</Text>
                 </TouchableOpacity>
 
             )
@@ -96,6 +96,8 @@ class Article extends Component {
           prevText: 'Prev',
           nextText: 'Next',
         }} />
+        <WhiteSpace/>
+        <WhiteSpace/>
       </ScrollView>
     )
   }
@@ -104,11 +106,24 @@ class Article extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:10,
   },
   icon: { width: 32, height: 32 },
   image:{
-    width:50,
-    height:50,
+    width:80,
+    height:80*3/4,
+  },
+  title:{
+    position:'absolute',
+    marginTop:5,
+    left:90,
+    right:0,
+    fontSize:20,
+  },
+  content:{
+    fontSize:18,
+    marginTop:10,
+    marginBottom:40,
   }
 })
 

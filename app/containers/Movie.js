@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Button, Image, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
-import { Pagination, Icon } from 'antd-mobile';
+import { Pagination, WhiteSpace } from 'antd-mobile';
 
 import { NavigationActions, movieSrc } from '../utils'
 
@@ -11,7 +11,7 @@ class Movie extends Component {
   static navigationOptions = {
       title: 'Movie',
       header: null,
-      tabBarLabel: 'Bing',
+      tabBarLabel: '电影',
       tabBarIcon: ({ focused, tintColor }) =>
        <Image
         style={[styles.icon, { tintColor: focused ? tintColor : 'gray' }]}
@@ -40,8 +40,6 @@ class Movie extends Component {
     const parsed = parser.parseFromString(data, 'text/html');
     const list=parsed.getElementsByTagName('li');
 
-    console.log(list.length)
-
     for(let i=0;i<list.length;i++){
       let MovieItem={};
       MovieItem.href='http://www.vmovier.com'+list[i].getElementsByTagName('a')[0].getAttribute('href');
@@ -58,28 +56,26 @@ class Movie extends Component {
   }
 
 
-  press=(href)=>{
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'MovieContent', params:{href} }))
+  press=(href, title)=>{
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'MovieContent', params:{href, title} }))
   }
 
   changePage=(page)=>{
-    console.log(page);
+    this.scrollView.scrollTo({y:0})
     this.fetchMovie(page)
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} ref={el=>{this.scrollView=el}}>
         {
           this.props.app.movieList.map((item,index)=>{
             return(
-                <TouchableOpacity key={index} onPress={this.press.bind(this,item.href)}>
+                <TouchableOpacity style={styles.touch} key={index} onPress={this.press.bind(this,item.href, item.title)}>
                   <Image source={{uri:item.imgSrc}} style={styles.image}></Image>
-                  <Text>{item.title}</Text>
-                  <Text>{item.time}
-                    <Text>{item.mark.slice(0,3)}</Text>
-                  </Text>
-
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.time}>{item.time}</Text>
+                  <Text style={styles.mark}>{item.mark.slice(0,3)}分</Text>
                 </TouchableOpacity>
 
             )
@@ -89,6 +85,8 @@ class Movie extends Component {
           prevText: 'Prev',
           nextText: 'Next',
         }} />
+        <WhiteSpace />
+        <WhiteSpace />
       </ScrollView>
     )
   }
@@ -97,11 +95,31 @@ class Movie extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:10,
   },
   icon: { width: 32, height: 32 },
+  touch:{
+    marginBottom:20,
+  },
   image:{
-    width:100,
-    height:100,
+    width:120,
+    height:120*3/4,
+  },
+  title:{
+    position:'absolute',
+    left:130,
+    right:0,
+    fontSize:22,
+  },
+  time:{
+    position:'absolute',
+    bottom:0,
+    right:10,
+  },
+  mark:{
+    position:'absolute',
+    bottom:0,
+    left:130,
   }
 })
 

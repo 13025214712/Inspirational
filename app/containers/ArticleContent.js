@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView } from 'react-native'
+import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
-
+import { WhiteSpace } from 'antd-mobile';
 import { createAction, NavigationActions } from '../utils'
 
 @connect(({ app }) => ({ app }))
 class ArticleContent extends Component {
-  static navigationOptions = {
-    title: 'ArticleContent',
-  }
+
+  static navigationOptions=({navigation}) => ({
+    title: `${navigation.state.params.title}`,
+  })
 
   componentWillMount(){
     this.fetchContent()
@@ -22,7 +23,6 @@ class ArticleContent extends Component {
   }
 
   parseHTML=(data)=>{
-
     const parser = new DOMParser.DOMParser({errorHandler:{error:function(w){}}});
     const parsed = parser.parseFromString(data, 'text/html');
 
@@ -33,21 +33,13 @@ class ArticleContent extends Component {
     this.props.dispatch({type:'app/changeArticleContent',payload:{articleContent}})
   }
 
-  onLogin = () => {
-    this.props.dispatch(createAction('app/login')())
-  }
-
-  onClose = () => {
-    this.props.dispatch(NavigationActions.back())
-  }
-
   render() {
     const {articleContent}=this.props.app;
     return (
       <ScrollView style={styles.container}>
-        <Text>{articleContent.title}</Text>
+        <Text style={styles.title}>{articleContent.title}</Text>
         <Image source={{uri:articleContent.imgSrc}} style={styles.image} ></Image>
-        <Text>{articleContent.content}</Text>
+        <Text style={styles.content}>{articleContent.content}</Text>
       </ScrollView>
     )
   }
@@ -57,9 +49,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  title:{
+    fontSize:25,
+    textAlign:'center',
+    padding:10,
+  },
   image:{
-    width:300,
-    height:300,
+    width:Dimensions.get('screen').width,
+    height:Dimensions.get('screen').width*3/4,
+  },
+  content:{
+    fontSize:20,
+    padding:10,
   }
 })
 
