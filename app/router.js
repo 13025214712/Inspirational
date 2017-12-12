@@ -30,6 +30,7 @@ const HomeNavigator = TabNavigator(
     // swipeEnabled: false,
     animationEnabled: false,
     lazyLoad: true,
+    backBehavior:'none'
   }
 )
 
@@ -96,9 +97,10 @@ class Router extends PureComponent {
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
     if (currentScreen === 'ArticleContent') {
+      this.props.dispatch(NavigationActions.back())
       return true
     }
-    if (currentScreen !== 'Quotation') {
+    else if (currentScreen == 'MovieContent') {
       this.props.dispatch(NavigationActions.back())
       return true
     }

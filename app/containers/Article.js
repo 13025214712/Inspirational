@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding:10,
   },
-  icon: { width: 32, height: 32 },
+  icon: { width: 25, height: 25 },
   image:{
     width:80,
     height:80*3/4,

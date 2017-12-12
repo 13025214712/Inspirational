@@ -58,7 +58,7 @@ class Quotation extends Component {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 10 },
-  icon: { width: 32, height: 32 },
+  icon: { width: 25, height: 25 },
   english: { fontSize: 20, marginBottom: 10 },
   chinese: { fontSize: 20, marginBottom: 40 },
 })

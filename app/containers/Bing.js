@@ -54,7 +54,7 @@ class Bing extends Component {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  icon: { width: 32, height: 32 },
+  icon: { width: 25, height: 25 },
   image: { width: Dimensions.get('screen').width, height: Dimensions.get('screen').width * 1080 / 1920 },
   title: { fontSize: 25, padding: 10, textAlign: 'center' },
   content: { fontSize: 20, paddingLeft:10,paddingRight:10,marginBottom: 50 },
