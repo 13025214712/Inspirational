@@ -8,6 +8,9 @@ export default {
     login: false,
     quotationList: [],
     bingList: [],
+    articleList:[],
+    articleIndex:1,
+    articleTotal:0,
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -22,6 +25,9 @@ export default {
     changeBing(state, { payload }) {
       return { ...state, bingList: payload.bingList }
     },
+    changeArticleList(state,{payload}){
+      return {...state, articleList:payload.articleList }
+    }
   },
   effects: {
     *login({ payload }, { call, put }) {

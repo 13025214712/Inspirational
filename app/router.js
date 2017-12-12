@@ -9,15 +9,16 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 
-import Login from './containers/Login'
+import ArticleContent from './containers/ArticleContent'
 import Quotation from './containers/Quotation'
 import Bing from './containers/Bing'
-import Detail from './containers/Detail'
+import Article from './containers/Article'
 
 const HomeNavigator = TabNavigator(
   {
     Quotation: { screen: Quotation },
     Bing: { screen: Bing },
+    Article: { screen: Article },
   },
   {
     tabBarComponent: TabBarBottom,
@@ -28,20 +29,10 @@ const HomeNavigator = TabNavigator(
   }
 )
 
-const MainNavigator = StackNavigator(
-  {
-    HomeNavigator: { screen: HomeNavigator },
-    Detail: { screen: Detail },
-  },
-  {
-    headerMode: 'float',
-  }
-)
-
 const AppNavigator = StackNavigator(
   {
-    Main: { screen: MainNavigator },
-    Login: { screen: Login },
+    Main: { screen: HomeNavigator },
+    ArticleContent: { screen: ArticleContent },
   },
   {
     headerMode: 'none',
@@ -99,7 +90,7 @@ class Router extends PureComponent {
 
   backHandle = () => {
     const currentScreen = getCurrentScreen(this.props.router)
-    if (currentScreen === 'Login') {
+    if (currentScreen === 'ArticleContent') {
       return true
     }
     if (currentScreen !== 'Quotation') {

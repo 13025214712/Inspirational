@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { createAction, NavigationActions } from '../utils'
 
 @connect(({ app }) => ({ ...app }))
-class Login extends Component {
+class ArticleContent extends Component {
   static navigationOptions = {
-    title: 'Login',
+    title: 'ArticleContent',
   }
 
   onLogin = () => {
@@ -24,7 +24,7 @@ class Login extends Component {
       <View style={styles.container}>
         {fetching
           ? <ActivityIndicator />
-          : <Button title="Login" onPress={this.onLogin} />}
+          : <Button title={this.props.navigation.state.params.href} onPress={this.onLogin} />}
         {!fetching && <Button title="Close" onPress={this.onClose} />}
       </View>
     )
@@ -34,9 +34,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 
-export default Login
+export default ArticleContent

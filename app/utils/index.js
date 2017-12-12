@@ -9,3 +9,7 @@ export const quotationSrc =
 
 export const bingSrc =
   'http://route.showapi.com/1377-1?showapi_appid=51856&showapi_sign=3d9c0bd00fb84342b61dc8aaafa131c3'
+
+export const articleSrc=(index)=>{
+  return `http://m.wenzhangba.com/lizhiwenzhang/list_9_${index}.html`
+}
