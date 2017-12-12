@@ -13,3 +13,7 @@ export const bingSrc =
 export const articleSrc=(index)=>{
   return `http://m.wenzhangba.com/lizhiwenzhang/list_9_${index}.html`
 }
+
+export const movieSrc=(index)=>{
+  return `http://www.vmovier.com/cate/getbycate?cate=7&tab=new&page=${Math.ceil(index/3)}&pagepart=${index%3}`
+}

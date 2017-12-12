@@ -37,7 +37,7 @@ class Article extends Component {
 
   parseHTML=(data)=>{
     let articleList=[];
-    const parser = new DOMParser.DOMParser({errorHandler:{error:function(w){console.warn(w)}}});
+    const parser = new DOMParser.DOMParser({errorHandler:{error:function(w){}}});
     const parsed = parser.parseFromString(data, 'text/html');
     const list=parsed.getElementsByClassName('yi-list-ul')[0].getElementsByTagName('li')
 

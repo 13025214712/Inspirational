@@ -9,16 +9,20 @@ import {
 } from 'react-navigation'
 import { connect } from 'react-redux'
 
-import ArticleContent from './containers/ArticleContent'
+
 import Quotation from './containers/Quotation'
 import Bing from './containers/Bing'
 import Article from './containers/Article'
+import Movie from './containers/Movie'
+import ArticleContent from './containers/ArticleContent'
+import MovieContent from './containers/MovieContent'
 
 const HomeNavigator = TabNavigator(
   {
     Quotation: { screen: Quotation },
     Bing: { screen: Bing },
     Article: { screen: Article },
+    Movie: { screen: Movie },
   },
   {
     tabBarComponent: TabBarBottom,
@@ -33,6 +37,7 @@ const AppNavigator = StackNavigator(
   {
     Main: { screen: HomeNavigator },
     ArticleContent: { screen: ArticleContent },
+    MovieContent: { screen: MovieContent },
   },
   {
     // headerMode: 'none',

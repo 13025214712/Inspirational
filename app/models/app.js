@@ -12,6 +12,10 @@ export default {
     articleIndex:1,
     articleTotal:0,
     articleContent:{},
+    movieList:[],
+    movieIndex:1,
+    movieTotal:6*3,
+    movieContent:{},
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -26,6 +30,7 @@ export default {
     changeBing(state, { payload }) {
       return { ...state, bingList: payload.bingList }
     },
+
     changeArticleList(state,{payload}){
       return {...state, articleList:payload.articleList }
     },
@@ -37,7 +42,17 @@ export default {
     },
     changeArticleContent(state,{payload}){
       return {...state, articleContent:payload.articleContent }
-    }
+    },
+
+    changeMovieIndex(state,{payload}){
+      return {...state, movieIndex:payload.movieIndex }
+    },
+    changeMovieList(state,{payload}){
+      return {...state, movieList:payload.movieList }
+    },
+    changeMovieContent(state,{payload}){
+      return {...state, movieContent:payload.movieContent }
+    },
   },
   effects: {
     *login({ payload }, { call, put }) {
