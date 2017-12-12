@@ -29,6 +29,12 @@ export default {
     changeArticleList(state,{payload}){
       return {...state, articleList:payload.articleList }
     },
+    changeArticleTotal(state,{payload}){
+      return {...state, articleTotal:payload.articleTotal }
+    },
+    changeArticleIndex(state,{payload}){
+      return {...state, articleIndex:payload.articleIndex }
+    },
     changeArticleContent(state,{payload}){
       return {...state, articleContent:payload.articleContent }
     }

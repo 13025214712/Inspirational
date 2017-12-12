@@ -17,26 +17,20 @@ class ArticleContent extends Component {
 
   fetchContent=()=>{
     fetch(this.props.navigation.state.params.href).then(data=>data.text()).then(data=>{
-      this.parseHTML(data)
+      this.parseHTML(data);
     })
   }
 
   parseHTML=(data)=>{
 
-    const parser = new DOMParser.DOMParser();
+    const parser = new DOMParser.DOMParser({errorHandler:{error:function(w){console.warn(w)}}});
     const parsed = parser.parseFromString(data, 'text/html');
 
     let articleContent={};
     articleContent.title=parsed.getElementsByClassName('w-normal yi-normal-title')[0].textContent.trim();
     articleContent.imgSrc=parsed.getElementsByClassName('inner_pic')[0].getElementsByTagName('img')[0].getAttribute('src');
     articleContent.content=parsed.getElementsByClassName('yi-content-text tc-f4')[0].textContent;
-
     this.props.dispatch({type:'app/changeArticleContent',payload:{articleContent}})
-
-    // autocopy
-
-
-
   }
 
   onLogin = () => {

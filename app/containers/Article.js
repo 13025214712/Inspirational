@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Button, Image, ScrollView, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
+import { Pagination, Icon } from 'antd-mobile';
 
 import { NavigationActions, articleSrc } from '../utils'
 
@@ -19,20 +20,24 @@ class Article extends Component {
   }
 
   componentWillMount(){
-    this.fetchArticle()
+    if(!this.props.app.articleList.length){
+      this.fetchArticle(this.props.app.articleIndex)
+    }
+
   }
 
-  fetchArticle=()=>{
-    const src=articleSrc(this.props.app.articleIndex);
+  fetchArticle=(articleIndex)=>{
+    const src=articleSrc(articleIndex);
     fetch(src).then(data=>data.text()).then(data=>{
-      this.parseHTML(data)
+      this.parseHTML(data);
+      this.props.dispatch({type:'app/changeArticleIndex',payload:{articleIndex}})
      })
 
   }
 
   parseHTML=(data)=>{
     let articleList=[];
-    const parser = new DOMParser.DOMParser();
+    const parser = new DOMParser.DOMParser({errorHandler:{error:function(w){console.warn(w)}}});
     const parsed = parser.parseFromString(data, 'text/html');
     const list=parsed.getElementsByClassName('yi-list-ul')[0].getElementsByTagName('li')
 
@@ -44,11 +49,14 @@ class Article extends Component {
       articleItem.title=a.textContent;
       articleItem.href=a.getAttribute('href');
       articleItem.content=list[i].getElementsByClassName('yi-list-jj')[0].textContent.trim();
-
+//gotopage-s
       articleList.push(articleItem);
     }
 
-    this.props.dispatch({type:'app/changeArticleList', payload:{articleList } })
+    const articleTotal=parsed.getElementsByClassName('gotopage-s yi-pageturn-n-select')[0].getElementsByTagName('option').length;
+
+    this.props.dispatch({type:'app/changeArticleList', payload:{articleList } });
+    this.props.dispatch({type:'app/changeArticleTotal', payload:{articleTotal } });
 
   }
 
@@ -62,6 +70,11 @@ class Article extends Component {
 
   press=(href)=>{
     this.props.dispatch(NavigationActions.navigate({ routeName: 'ArticleContent', params:{href} }))
+  }
+
+  changePage=(page)=>{
+    console.log(page);
+    this.fetchArticle(page)
   }
 
   render() {
@@ -79,6 +92,10 @@ class Article extends Component {
             )
           })
         }
+        <Pagination onChange={this.changePage} total={this.props.app.articleTotal} current={this.props.app.articleIndex} locale={{
+          prevText: 'Prev',
+          nextText: 'Next',
+        }} />
       </ScrollView>
     )
   }
