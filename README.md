@@ -17,6 +17,22 @@ In this starter, I provide a router model to control the default action flow of 
 
 Also there is another workaround for a missing feature https://github.com/react-community/react-navigation/issues/232, so I use two **StackNavigator**s to contain the screens with different transition animations, you can create you own transition animations via **transitionConfig**, see https://github.com/react-community/react-navigation/pull/99
 
-## LICENSE
+## 项目效果图
 
-MIT
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/1.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/2.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/21.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/3.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/31.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/4.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/41.png)
+
+![](https://github.com/13025214712/Inspirational/blob/master/screenshots/42.png)
+
