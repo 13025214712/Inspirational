@@ -76,7 +76,7 @@ class MovieContent extends Component {
           </View>
         </TouchableHighlight>
 
-        <Text style={styles.content}>{'        '+movieContent.content}</Text>
+        <Text style={styles.content}>{'        '+movieContent.content||''}</Text>
       </ScrollView>
     )
   }
