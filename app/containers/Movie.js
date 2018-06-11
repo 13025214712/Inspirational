@@ -82,8 +82,8 @@ class Movie extends Component {
           })
         }
         <Pagination onChange={this.changePage} total={this.props.app.movieTotal} current={this.props.app.movieIndex} locale={{
-          prevText: 'Prev',
-          nextText: 'Next',
+          prevText: '上一页',
+          nextText: '下一页',
         }} />
         <WhiteSpace />
         <WhiteSpace />
@@ -110,6 +110,9 @@ const styles = StyleSheet.create({
     left:130,
     right:0,
     fontSize:22,
+    lineHeight: 32,
+    height: 64,
+    overflow: 'hidden',
   },
   time:{
     position:'absolute',

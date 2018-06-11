@@ -93,8 +93,8 @@ class Article extends Component {
           })
         }
         <Pagination onChange={this.changePage} total={this.props.app.articleTotal} current={this.props.app.articleIndex} locale={{
-          prevText: 'Prev',
-          nextText: 'Next',
+          prevText: '上一页',
+          nextText: '下一页',
         }} />
         <WhiteSpace/>
         <WhiteSpace/>
@@ -115,10 +115,13 @@ const styles = StyleSheet.create({
   },
   title:{
     position:'absolute',
-    marginTop:5,
+    marginTop:2,
     left:90,
     right:0,
     fontSize:20,
+    lineHeight: 30,
+    height: 60,
+    overflow: 'hidden',
   },
   content:{
     fontSize:18,

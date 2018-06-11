@@ -6,6 +6,7 @@ import {
   Text,
   ScrollView,
   Dimensions,
+  StatusBar
 } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -40,6 +41,7 @@ class Bing extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <StatusBar backgroundColor="rgb(233, 233, 239)"></StatusBar>
         {this.props.app.bingList.map((item, index) =>
           <View key={index}>
             <Image style={styles.image} source={{ uri: item.pic }} />

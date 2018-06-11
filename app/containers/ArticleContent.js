@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
 import { WhiteSpace } from 'antd-mobile';
@@ -37,6 +37,7 @@ class ArticleContent extends Component {
     const {articleContent}=this.props.app;
     return (
       <ScrollView style={styles.container}>
+        <StatusBar backgroundColor="white"></StatusBar>
         <Text style={styles.title}>{articleContent.title}</Text>
         <Image source={{uri:articleContent.imgSrc}} style={styles.image} ></Image>
         <Text style={styles.content}>{articleContent.content}</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView, TouchableHighlight, Dimensions } from 'react-native'
+import { StyleSheet, View, Button, ActivityIndicator, Text, Image, ScrollView, TouchableHighlight, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import DOMParser from 'react-native-html-parser';
 import Video from 'react-native-video';
@@ -64,13 +64,16 @@ class MovieContent extends Component {
     const {movieContent}=this.props.app;
     return (
       <ScrollView style={styles.container}>
+        <StatusBar backgroundColor="white"></StatusBar>
         <Text style={styles.title}>{movieContent.title}</Text>
         <TouchableHighlight onPress={this.clickVideo}>
-          <Video source={{uri:movieContent.movieVideoSrc }}
-                 paused={this.state.videoPaused}
-                 repeat={true}
-                 resizeMode="cover"
-                 style={styles.video} />
+          <View style={styles.bgBlack}>
+            <Video source={{uri:movieContent.movieVideoSrc }}
+                   paused={this.state.videoPaused}
+                   repeat={true}
+                   resizeMode="cover"
+                   style={styles.video} />
+          </View>
         </TouchableHighlight>
 
         <Text style={styles.content}>{'        '+movieContent.content}</Text>
@@ -91,6 +94,9 @@ const styles = StyleSheet.create({
   image:{
     width:300,
     height:300,
+  },
+  bgBlack:{
+    backgroundColor: 'black',
   },
   video:{
     width:Dimensions.get('screen').width,
